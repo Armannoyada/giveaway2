@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Giveaway Contest</title>
+    <link rel="icon" type="image/png" href="2386_020425_STUCARE_HP-PNG-03.png">
+
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1>Stu Care Giveaway Contest</h1>
+                <p class="tagline">Enter for a chance to win amazing prizes!</p>
+                <div class="header-decoration">
+                    <div class="decoration-circle circle1"></div>
+                    <div class="decoration-circle circle2"></div>
+                    <div class="decoration-circle circle3"></div>
+                </div>
+            </div>
+        </header>
+
+        <section class="prizes">
+            <h2><i class="fas fa-gift"></i> Awesome Prizes to be Won</h2>
+            <div class="prize-container">
+                <div class="prize-card">
+                    <div class="prize-icon"><i class="fas fa-headphones"></i></div>
+                    <h3>Earbuds</h3>
+                    <p>Premium wireless earbuds with noise cancellation</p>
+                </div>
+                <div class="prize-card">
+                    <div class="prize-icon"><i class="fas fa-battery-full"></i></div>
+                    <h3>Power Bank</h3>
+                    <p>10,000mAh fast charging power bank</p>
+                </div>
+               
+                <div class="prize-card">
+                    <div class="prize-icon"><i class="fas fa-box-open"></i></div>
+                    <h3>Hampers</h3>
+                    <p>Gift hampers with various goodies</p>
+                </div>
+            </div>
+        </section>
+
+        
+
+        <section class="form-section">
+            <h2><i class="fas fa-user-edit"></i> Enter the Giveaway</h2>
+            <form id="giveawayForm">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                
+               
+                
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" id="instagram" name="instagram" required>
+                    <a href="https://instagram.com/your_account" target="_blank" id="instagramLink">Instagram page</a>
+
+                </div>
+                
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" id="shared" name="shared" required>
+                    <label for="shared">I have shared this giveaway with my friends</label>
+                </div>
+                
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" id="terms" name="terms" required>
+                    <label for="terms">I agree to the terms and conditions</label>
+                </div>
+                
+                <button type="submit" class="submit-btn">
+                    <span>Submit Entry</span>
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </form>
+        </section>
+
+        <div class="admin-link">
+            <a href="admin.html">Admin Login</a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Student Giveaway Contest. All rights reserved.</p>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="success-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2>Entry Submitted!</h2>
+            <p>Thank you for participating in our giveaway. Good luck!</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        const form = document.getElementById("giveawayForm");
+        const instagramCheckbox = document.getElementById("instagram");
+        const sharedCheckbox = document.getElementById("shared");
+        const termsCheckbox = document.getElementById("terms");
+        const submitBtn = form.querySelector("button[type='submit']");
+        const instagramLink = document.getElementById("instagramLink");
+    
+        let instagramVisited = false;
+    
+        // Initially disable the submit button
+        submitBtn.disabled = true;
+    
+        // Detect if Instagram link is clicked
+        instagramLink.addEventListener("click", () => {
+            instagramVisited = true;
+            validateForm();
+        });
+    
+        // Listen for checkbox changes
+        [instagramCheckbox, sharedCheckbox, termsCheckbox].forEach(checkbox => {
+            checkbox.addEventListener("change", validateForm);
+        });
+    
+        function validateForm() {
+            if (
+                instagramVisited &&
+                instagramCheckbox.checked &&
+                sharedCheckbox.checked &&
+                termsCheckbox.checked
+            ) {
+                submitBtn.disabled = false;
+            } else {
+                submitBtn.disabled = true;
+            }
+        }
+    
+        // Optional: prevent manual form submit bypass
+        form.addEventListener("submit", function(e) {
+            if (!instagramVisited) {
+                e.preventDefault();
+                alert("Please visit our Instagram page before submitting the form.");
+            }
+        });
+    </script>
+    
+</body>
+</html>

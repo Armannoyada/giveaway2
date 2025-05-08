@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Student Giveaway Contest</title>
+    <link rel="stylesheet" href="admin-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+</head>
+<body>
+    <body>
+        <div class="admin-container">
+            <!-- Login Form (shown by default) -->
+            <div id="loginSection" class="login-section">
+                <div class="login-card">
+                    <div class="login-header">
+                        <i class="fas fa-user-shield"></i>
+                        <h1>Admin Login</h1>
+                    </div>
+                    <form id="loginForm">
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input type="text" id="username" name="username" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" name="password" required>
+                        </div>
+                        <button type="submit" class="login-btn">
+                            <span>Login</span>
+                            <i class="fas fa-sign-in-alt"></i>
+                        </button>
+                    </form>
+                    <div id="loginError" class="error-message hidden"></div>
+                    <div class="back-link">
+                        <a href="index.html"><i class="fas fa-arrow-left"></i> Back to Giveaway</a>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Admin Dashboard (hidden by default) -->
+            <div id="dashboardSection" class="dashboard-section hidden">
+                <header class="dashboard-header">
+                    <h1><i class="fas fa-tachometer-alt"></i> Admin Dashboard</h1>
+                    <button id="logoutBtn" class="logout-btn">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </header>
+    
+                <div class="dashboard-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-users"></i></div>
+                        <div class="stat-info">
+                            <h3>Total Entries</h3>
+                            <p id="totalEntries">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-calendar-alt"></i></div>
+                        <div class="stat-info">
+                            <h3>Today's Entries</h3>
+                            <p id="todayEntries">0</p>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="dashboard-actions">
+                    <button id="exportBtn" class="action-btn">
+                        <i class="fas fa-file-excel"></i> Export to Excel
+                    </button>
+                    <button id="selectWinnerBtn" class="action-btn">
+                        <i class="fas fa-trophy"></i> Select Random Winner
+                    </button>
+                    <button id="clearDataBtn" class="action-btn danger">
+                        <i class="fas fa-trash"></i> Clear All Data
+                    </button>
+                </div>
+    
+                <div id="winnerDisplay" class="winner-display hidden">
+                    <div class="winner-header">
+                        <i class="fas fa-crown"></i>
+                        <h2>Selected Winner</h2>
+                    </div>
+                    <div id="winnerInfo" class="winner-info"></div>
+                </div>
+    
+                <div class="entries-section">
+                    <h2><i class="fas fa-list"></i> All Entries</h2>
+                    <div class="table-container">
+                        <table id="entriesTable">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>College</th>
+                                    <th>Course</th>
+                                    <th>Year</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody id="entriesTableBody">
+                                <!-- Entries will be populated here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Confirmation Modal -->
+        <div id="confirmModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div class="warning-icon">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <h2>Confirm Action</h2>
+                <p id="confirmMessage">Are you sure you want to proceed?</p>
+                <div class="modal-buttons">
+                    <button id="confirmCancel" class="modal-btn cancel">Cancel</button>
+                    <button id="confirmOk" class="modal-btn confirm">Confirm</button>
+                </div>
+            </div>
+        </div>
+    
+        
+    
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    
+    <!-- Your script with type="module" -->
+    <script type="module" src="admin.js"></script>
+</body>
+</html>
